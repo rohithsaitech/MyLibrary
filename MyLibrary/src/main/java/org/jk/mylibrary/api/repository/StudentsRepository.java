@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StudentsRepository extends JpaRepository<Students, Long> {
 
-	Students findUserByMblNum(Long mobile);
+	Students findStudentByMblNum(Long mobile);
 }

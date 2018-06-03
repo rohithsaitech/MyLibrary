@@ -18,7 +18,7 @@ public class StudentsService {
 		//Creating Response Object
 		ResponseVO responseVO=new ResponseVO();
 		//Checking UserInDB
-		Students dbstudent=studentrepository.findUserByMblNum(studentvo.getMobile());
+		Students dbstudent=studentrepository.findStudentByMblNum(studentvo.getMobile());
 		if (dbstudent == null) {
 			Students student=new Students();
 			student.setSname(studentvo.getSname());
