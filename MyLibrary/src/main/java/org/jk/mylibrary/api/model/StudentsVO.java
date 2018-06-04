@@ -16,6 +16,7 @@ public class StudentsVO {
 	private int yearofstu;
 	private int BookCount;
 	private String status;
+	
 	public int getSid() {
 		return sid;
 	}
@@ -57,6 +58,12 @@ public class StudentsVO {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	
+	@Override
+	public String toString() {
+		return "StudentsVO [sid=" + sid + ", sname=" + sname + ", mobile=" + mobile + ", Address=" + Address
+				+ ", yearofstu=" + yearofstu + ", BookCount=" + BookCount + ", status=" + status + "]";
 	}
 	
 	

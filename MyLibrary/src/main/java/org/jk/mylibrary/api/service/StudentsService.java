@@ -13,14 +13,20 @@ public class StudentsService {
 
 	@Autowired
 	private StudentsRepository studentrepository;
-	
-	public ResponseVO CreateStudent(StudentsVO studentvo){
-		//Creating Response Object
-		ResponseVO responseVO=new ResponseVO();
-		//Checking UserInDB
-		Students dbstudent=studentrepository.findStudentByMblNum(studentvo.getMobile());
-		if (dbstudent == null) {
-			Students student=new Students();
+
+	public ResponseVO registerStudent(StudentsVO studentvo) {
+		// Creating Response Object
+		ResponseVO responseVO = new ResponseVO();
+		// Checking UserInDB
+		Students dbstudent = studentrepository.findStudentByMobile(studentvo.getMobile());
+
+		if (dbstudent != null) {
+			if (dbstudent.getMobile().equals(studentvo.getMobile())) {
+				// Mobile already exist
+				responseVO = HttpStatusCode.ALREADY_REPORTED.getResponseVO("Mobile Number Already Exist");
+			}
+		} else if (dbstudent == null) {
+			Students student = new Students();
 			student.setSname(studentvo.getSname());
 			student.setBookCount(studentvo.getBookCount());
 			student.setMobile(studentvo.getMobile());
@@ -30,11 +36,7 @@ public class StudentsService {
 			studentrepository.save(student);
 			responseVO = HttpStatusCode.CREATED.getResponseVO("SUCCESS");
 		}
-		else if(dbstudent.getMobile().equals(studentvo.getMobile())) {
-			// Mobile already exist
-			responseVO = HttpStatusCode.ALREADY_REPORTED.getResponseVO("Mobile Number Already Exist");
-		}
 		return responseVO;
-		
+
 	}
 }
